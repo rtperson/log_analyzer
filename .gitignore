@@ -4,3 +4,6 @@ cabal-dev
 *.hi
 *.chi
 *.chs.h
+html.txt
+log.properties
+test.html
