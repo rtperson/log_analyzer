@@ -31,8 +31,11 @@ import Text.Parsec.Language
 -- begin the very clumsy attempts to play around with Parsec. All my parser combinators 
 -- look the same because they are the result of speed-reading "Write Yourself a Scheme in 48 Hours"
 -- A few todos: 1) use Overloaded Strings so we can read in the file as either ByteString or [Char]
+--              2) Extend logic so that it can read in a multi-line file 
+--              3) And assign the keys and values to a dictionary (a la Data.Map)
+--              4) Create unit tests for this functionality
 
-String logFile = "testlog.properties"
+logFile = "testlog.properties"
 
 data Props = Key String
            | Separ
@@ -76,12 +79,11 @@ parseProps = do first <- parseKey
 
 main :: IO ()
 main = do
-    key <- parseFromFile parseKey "log.properties"
-    --case key of 
-    --    Left  a -> return "Could not parse file"
-    --    Right b -> return b
+    key <- parseFromFile parseProps logFile
+    case key of
+        Left err -> putStrLn $ "received err: " ++ (show err)
+        Right v  -> putStrLn $ "Here's the key: " ++ (show v)
     return ()
-    --bracket (openFile "log.properties" ReadMode) hClose $
-    --    hPutStr h
+
 
 

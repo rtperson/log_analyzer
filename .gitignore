@@ -7,3 +7,4 @@ cabal-dev
 html.txt
 log.properties
 test.html
+src/log.properties
